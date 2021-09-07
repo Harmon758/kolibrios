@@ -1,0 +1,20 @@
+name: Fast-Forward
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+jobs:
+  fast-forward:
+    name: Fast-Forward
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+      - name: Fast-Forward
+        run: |
+          git remote add upstream git://repo.or.cz/kolibrios.git
+          git pull --ff-only upstream master
+          git push origin master
